@@ -7,8 +7,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -29,7 +31,7 @@ import cn.hjiabin.bos.service.IFixedAreaService;
 @Namespace("/")
 @Controller
 @Scope("prototype")
-public class FixedAction extends BaseAction<FixedArea> {
+public class FixedAreaAction extends BaseAction<FixedArea> {
 
 	@Autowired
 	private IFixedAreaService fixedAreaServiceImpl;
@@ -61,6 +63,12 @@ public class FixedAction extends BaseAction<FixedArea> {
 		
 		Page<FixedArea> pageData = fixedAreaServiceImpl.findPageQuery(specification,pageable);
 		pushPageDataToValueStack(pageData);
+		return SUCCESS;
+	}
+	
+	@Action(value="fixedArea_findNoAssociationCustomers",results={@Result(name="success",type="json")})
+	public String findNoAssociationCustomers(){
+		WebClient.create("http://localhost:9002/crm_management/services/customerService/noassociationcustomers").accept(MediaType.APPLICATION_JSON).getCollection(Cust)
 		return SUCCESS;
 	}
 }

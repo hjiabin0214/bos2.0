@@ -50,8 +50,26 @@
 				$('#searchWindow').window("open");
 			}
 			
-			function doAssociations(){
-				$('#customerWindow').window('open');
+			function doAssociationCustomers(){
+				var rows = $("#grid").datagrid('getSelections');
+				if(rows.length == 1){
+					$('#customerWindow').window('open');
+					$("#customerFixedAreaId").val(rows[0].id);
+					$.post("../../fixedArea_findNoAssociationCustomers.action",function(data){
+						$(data).each(function(){
+							var option = $("<option value='"+this.id+"'>"+this.username+"("+this.address+")</option>");
+							$("#noassociationSelect").append(option);
+						});
+					});
+					$.post("../../fixedArea_findHasAssociationFixedAreaCustomers.action",{"id":rows[0].id},function(data){
+						$(data).each(function(){
+							var option = $("<option value='"+this.id+"'>"+this.username+"("+this.address+")</option>");
+							$("#associationSelect").append(option);
+						});
+					});
+				}else {
+					$.messager.alert("警告","关联客户,只能（必须）选择一个定区","warning");
+				}
 			}
 			
 			//工具栏
@@ -79,7 +97,7 @@
 				id : 'button-association',
 				text : '关联客户',
 				iconCls : 'icon-sum',
-				handler : doAssociations
+				handler : doAssociationCustomers
 			},{
 				id : 'button-association-courier',
 				text : '关联快递员',
@@ -443,7 +461,7 @@
 		</div>
 
 		<!-- 关联客户窗口 -->
-		<div class="easyui-window" title="关联客户窗口" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 600px;height: 300px;">
+		<div class="easyui-window" title="关联客户窗口" id="customerWindow" modal="true" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 600px;height: 300px;">
 			<div style="overflow:auto;padding:5px;" border="false">
 				<form id="customerForm" action="../../decidedzone_assigncustomerstodecidedzone.action" method="post">
 					<table class="table-edit" width="80%" align="center">

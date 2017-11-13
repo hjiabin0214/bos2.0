@@ -126,4 +126,11 @@ public class CourierAction extends ActionSupport implements
 		courierServiceImpl.delBatch(idArray);
 		return SUCCESS;
 	}
+	
+	@Action(value="courier__findNoAssociation",results={@Result(name="success",type="json")})
+	public String findAssociation(){
+		List<Courier> couriers = courierServiceImpl.findNoassociation();
+		ActionContext.getContext().getValueStack().push(couriers);
+		return SUCCESS;
+	}
 }

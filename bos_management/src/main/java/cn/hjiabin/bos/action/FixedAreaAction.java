@@ -1,6 +1,7 @@
 package cn.hjiabin.bos.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -26,6 +27,9 @@ import org.springframework.stereotype.Controller;
 import cn.hjiabin.bos.action.base.BaseAction;
 import cn.hjiabin.bos.domain.FixedArea;
 import cn.hjiabin.bos.service.IFixedAreaService;
+import cn.hjiabin.crm.domain.Customer;
+
+import com.opensymphony.xwork2.ActionContext;
 
 @ParentPackage("json-default")
 @Namespace("/")
@@ -68,7 +72,28 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	
 	@Action(value="fixedArea_findNoAssociationCustomers",results={@Result(name="success",type="json")})
 	public String findNoAssociationCustomers(){
-		WebClient.create("http://localhost:9002/crm_management/services/customerService/noassociationcustomers").accept(MediaType.APPLICATION_JSON).getCollection(Cust)
+		Collection<? extends Customer> collection = WebClient.create("http://localhost:9002/crm_management/services/customerService/noassociationcustomers").accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
+		ActionContext.getContext().getValueStack().push(collection);
+		return SUCCESS;
+	}
+	
+	@Action(value="fixedArea_findHasAssociationFixedAreaCustomers",results={@Result(name="success",type="json")})
+	public String findHasAssociationFixedAreaCustomers(){
+		Collection<? extends Customer> collection = WebClient.create("http://localhost:9002/crm_management/services/customerService/associationfixedareacustomers/"+model.getId()).accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
+		ActionContext.getContext().getValueStack().push(collection);
+		return SUCCESS;
+	}
+	
+	private String[] customerIds;
+
+	public void setCustomerIds(String[] customerIds) {
+		this.customerIds = customerIds;
+	}
+	
+	@Action(value="fixedArea_associationCustomersToFixedArea",results={@Result(name="success",type = "redirect", location = "./pages/base/fixed_area.html")})
+	public String associationCustomersToFixedArea(){
+		String customerIdStr = StringUtils.join(customerIds,",");
+		WebClient.create("http://localhost:9002/crm_management/services/customerService/associationcustomerstofixedarea?customerIdStr="+customerIdStr+"&fixedAreaId="+model.getId()).put(null);
 		return SUCCESS;
 	}
 }

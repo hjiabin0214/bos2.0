@@ -53,24 +53,40 @@
 			function doAssociationCustomers(){
 				var rows = $("#grid").datagrid('getSelections');
 				if(rows.length == 1){
-					$('#customerWindow').window('open');
 					$("#customerFixedAreaId").val(rows[0].id);
+					
+					$.messager.progress({
+						interval : 500
+					});
+					
 					$.post("../../fixedArea_findNoAssociationCustomers.action",function(data){
+						$("#noassociationSelect").empty();
 						$(data).each(function(){
+							
 							var option = $("<option value='"+this.id+"'>"+this.username+"("+this.address+")</option>");
 							$("#noassociationSelect").append(option);
 						});
+						
+						$.messager.progress('close');
+						
+						$('#customerWindow').window('open');
+						
 					});
+					
 					$.post("../../fixedArea_findHasAssociationFixedAreaCustomers.action",{"id":rows[0].id},function(data){
+						$("#associationSelect").empty();
 						$(data).each(function(){
+							
 							var option = $("<option value='"+this.id+"'>"+this.username+"("+this.address+")</option>");
 							$("#associationSelect").append(option);
 						});
+						
 					});
 				}else {
 					$.messager.alert("警告","关联客户,只能（必须）选择一个定区","warning");
 				}
 			}
+			
 			
 			//工具栏
 			var toolbar = [ {
@@ -206,6 +222,20 @@
 					}else {
 						$.messager.alert("警告","表单中存在非法输入项!","warning")
 					}
+				});
+				
+				
+				$("#toRight").click(function(){
+					$("#associationSelect").append($("#noassociationSelect option:selected"));
+				});
+				
+				$("#toLeft").click(function(){
+					$("#noassociationSelect").append($("#associationSelect option:selected"));
+				});
+				
+				$("#associationBtn").click(function(){
+					$("#associationSelect option").attr("selected","selected");
+					$("#customerForm").submit();
 				});
 				
 			});
@@ -463,7 +493,7 @@
 		<!-- 关联客户窗口 -->
 		<div class="easyui-window" title="关联客户窗口" id="customerWindow" modal="true" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 600px;height: 300px;">
 			<div style="overflow:auto;padding:5px;" border="false">
-				<form id="customerForm" action="../../decidedzone_assigncustomerstodecidedzone.action" method="post">
+				<form id="customerForm" action="../../fixedArea_associationCustomersToFixedArea.action" method="post">
 					<table class="table-edit" width="80%" align="center">
 						<tr class="title">
 							<td colspan="3">关联客户</td>
@@ -475,9 +505,9 @@
 								<select id="noassociationSelect" multiple="multiple" size="10" style="width:200px;"></select>
 							</td>
 							<td>
-								<input type="button" value="》》" id="toRight">
+								<input type="button" value=">>" id="toRight">
 								<br/>
-								<input type="button" value="《《" id="toLeft">
+								<input type="button" value="<<" id="toLeft">
 							</td>
 							<td>
 								已关联定区客户列表 <br />
@@ -507,7 +537,7 @@
 							<td>
 								<!-- 存放定区编号 -->
 								<input type="hidden" name="id" id="courierFixedAreaId" />
-								<input type="text" name="courierId" class="easyui-combobox" required="true" />
+								<input type="text" name="courierId" class="easyui-combobox" required="true" data-options="url:'../../courier_findNoAssociation.action',valueField:'id',textField:'info'" />
 							</td>
 						</tr>
 						<tr>

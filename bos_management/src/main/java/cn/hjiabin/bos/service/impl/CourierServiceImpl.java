@@ -1,5 +1,13 @@
 package cn.hjiabin.bos.service.impl;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +44,15 @@ public class CourierServiceImpl implements ICourierService {
 		}
 	}
 
-
+	@Override
+	public List<Courier> findNoassociation() {
+		Specification<Courier> specification = new Specification<Courier>() {
+			@Override
+			public Predicate toPredicate(Root<Courier> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Predicate p = cb.isEmpty(root.get("fixedAreas").as(Set.class));
+				return p;
+			}
+		};
+		return courierRepository.findAll(specification);
+	}
 }

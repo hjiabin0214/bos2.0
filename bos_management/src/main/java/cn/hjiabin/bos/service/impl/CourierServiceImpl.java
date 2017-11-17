@@ -45,7 +45,7 @@ public class CourierServiceImpl implements ICourierService {
 	}
 
 	@Override
-	public List<Courier> findNoassociation() {
+	public List<Courier> findNoAssociation() {
 		Specification<Courier> specification = new Specification<Courier>() {
 			@Override
 			public Predicate toPredicate(Root<Courier> root, CriteriaQuery<?> query, CriteriaBuilder cb) {

@@ -96,4 +96,21 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		WebClient.create("http://localhost:9002/crm_management/services/customerService/associationcustomerstofixedarea?customerIdStr="+customerIdStr+"&fixedAreaId="+model.getId()).put(null);
 		return SUCCESS;
 	}
+	
+	private Integer courierId;
+	private Integer takeTimeId;
+
+	public void setCourierId(Integer courierId) {
+		this.courierId = courierId;
+	}
+
+	public void setTakeTimeId(Integer takeTimeId) {
+		this.takeTimeId = takeTimeId;
+	}
+	
+	@Action(value="fixedArea_associationCourierToFixedArea",results={@Result(name="success",type="redirect",location="./pages/base/fixed_area.html")})
+	public String associationCourierToFixedArea(){
+		fixedAreaServiceImpl.associationCourierToFixedArea(model, courierId, takeTimeId);
+		return SUCCESS;
+	}
 }

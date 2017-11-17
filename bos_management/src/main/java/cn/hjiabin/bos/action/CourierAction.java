@@ -127,9 +127,9 @@ public class CourierAction extends ActionSupport implements
 		return SUCCESS;
 	}
 	
-	@Action(value="courier__findNoAssociation",results={@Result(name="success",type="json")})
-	public String findAssociation(){
-		List<Courier> couriers = courierServiceImpl.findNoassociation();
+	@Action(value="courier_findNoAssociation",results={@Result(name="success",type="json")})
+	public String findNoAssociation(){
+		List<Courier> couriers = courierServiceImpl.findNoAssociation();
 		ActionContext.getContext().getValueStack().push(couriers);
 		return SUCCESS;
 	}

@@ -12,7 +12,14 @@
 	<name>bos_management</name>
 	<description>核心业务管理平台</description>
 
-	
+	<dependencies>
+		<dependency>
+			<groupId>cn.itcast.maven</groupId>
+			<artifactId>crm_domain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<finalName>bos</finalName>
 		<pluginManagement>
@@ -41,12 +48,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<dependencies>
-			<dependency>
-  		<groupId>cn.itcast.maven</groupId>
-  		<artifactId>crm_domain</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-	</dependencies>
 </project>

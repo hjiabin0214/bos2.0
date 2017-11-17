@@ -7,8 +7,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.hjiabin.bos.dao.ICourierRepository;
 import cn.hjiabin.bos.dao.IFixedAreaRepository;
+import cn.hjiabin.bos.dao.ITakeTimeRepository;
+import cn.hjiabin.bos.domain.Courier;
 import cn.hjiabin.bos.domain.FixedArea;
+import cn.hjiabin.bos.domain.TakeTime;
 import cn.hjiabin.bos.service.IFixedAreaService;
 
 @Service
@@ -26,5 +30,28 @@ public class FixedAreaServiceImpl implements IFixedAreaService {
 	@Override
 	public Page<FixedArea> findPageQuery(Specification<FixedArea> specification, Pageable pageable) {
 		return fixedAreaRepository.findAll(specification, pageable);
+	}
+
+	@Autowired
+	private ICourierRepository courierRepository;
+	@Autowired
+	private ITakeTimeRepository takeTimeRepository;
+	
+	
+	public void setCourierRepository(ICourierRepository courierRepository) {
+		this.courierRepository = courierRepository;
+	}
+
+	public void setTakeTimeRepository(ITakeTimeRepository takeTimeRepository) {
+		this.takeTimeRepository = takeTimeRepository;
+	}
+
+	@Override
+	public void associationCourierToFixedArea(FixedArea fixedAera, Integer courierId, Integer takeTimeId) {
+		FixedArea persistFixedArea = fixedAreaRepository.findOne(fixedAera.getId());
+		Courier courier = courierRepository.findOne(courierId);
+		TakeTime takeTime = takeTimeRepository.findOne(takeTimeId);
+		persistFixedArea.getCouriers().add(courier);
+		courier.setTakeTime(takeTime);
 	}
 }

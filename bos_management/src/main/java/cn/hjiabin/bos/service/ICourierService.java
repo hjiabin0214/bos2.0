@@ -16,6 +16,6 @@ public interface ICourierService {
 
 	public void delBatch(String[] idArray);
 
-	public List<Courier> findNoassociation();
+	public List<Courier> findNoAssociation();
 
 }

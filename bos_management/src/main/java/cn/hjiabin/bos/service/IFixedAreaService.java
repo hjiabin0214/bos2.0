@@ -12,4 +12,6 @@ public interface IFixedAreaService {
 
 	Page<FixedArea> findPageQuery(Specification<FixedArea> specification, Pageable pageable);
 
+	void associationCourierToFixedArea(FixedArea model, Integer courierId, Integer takeTimeId);
+
 }

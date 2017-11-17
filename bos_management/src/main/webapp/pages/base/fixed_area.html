@@ -125,6 +125,9 @@
 						// 只选择了一个定区
 						// 弹出定区关联快递员 窗口 
 						$("#courierWindow").window('open');
+						
+						$("#courierFixedAreaId").val(rows[0].id);
+						
 					}else{
 						// 没有选中定区，或者选择 了多个定区
 						$.messager.alert("警告","关联快递员,只能（必须）选择一个定区","warning");
@@ -236,6 +239,14 @@
 				$("#associationBtn").click(function(){
 					$("#associationSelect option").attr("selected","selected");
 					$("#customerForm").submit();
+				});
+				
+				$("#associationCourierBtn").click(function(){
+					if($("#courierForm").form('validate')){
+						$("#courierForm").submit();
+					}else {
+						$.messager.alert("警告","表单中存在非法数据","warning");
+					}
 				});
 				
 			});
@@ -543,7 +554,7 @@
 						<tr>
 							<td>选择收派时间</td>
 							<td>
-								<input type="text" name="takeTimeId" class="easyui-combobox" required="true" />
+								<input type="text" name="takeTimeId" class="easyui-combobox" required="true" data-options="url:'../../takeTime_findAll.action',valueField:'id',textField:'name'" />
 							</td>
 						</tr>
 						<tr>

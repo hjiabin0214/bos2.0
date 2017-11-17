@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import cn.hjiabin.bos.domain.Standard;
+import cn.hjiabin.bos.domain.base.Standard;
 
 public interface IStandardService {
 

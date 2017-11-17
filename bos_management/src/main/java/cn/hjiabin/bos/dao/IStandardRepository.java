@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import cn.hjiabin.bos.domain.Standard;
+import cn.hjiabin.bos.domain.base.Standard;
 
 public interface IStandardRepository extends JpaRepository<Standard, Integer> {
 

@@ -25,7 +25,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
-import cn.hjiabin.bos.domain.Courier;
+import cn.hjiabin.bos.domain.base.Courier;
 import cn.hjiabin.bos.service.ICourierService;
 
 import com.opensymphony.xwork2.ActionContext;

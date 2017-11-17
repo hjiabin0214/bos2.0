@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-import cn.hjiabin.bos.domain.Courier;
+import cn.hjiabin.bos.domain.base.Courier;
 
 public interface ICourierService {
 

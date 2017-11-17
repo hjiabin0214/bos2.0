@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
 import cn.hjiabin.bos.action.base.BaseAction;
-import cn.hjiabin.bos.domain.FixedArea;
+import cn.hjiabin.bos.domain.base.FixedArea;
 import cn.hjiabin.bos.service.IFixedAreaService;
 import cn.hjiabin.crm.domain.Customer;
 

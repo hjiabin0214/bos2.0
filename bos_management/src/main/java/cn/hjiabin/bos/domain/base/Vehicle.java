@@ -1,4 +1,4 @@
-package cn.hjiabin.bos.domain;
+package cn.hjiabin.bos.domain.base;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

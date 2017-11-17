@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.hjiabin.bos.dao.ICourierRepository;
 import cn.hjiabin.bos.dao.IFixedAreaRepository;
 import cn.hjiabin.bos.dao.ITakeTimeRepository;
-import cn.hjiabin.bos.domain.Courier;
-import cn.hjiabin.bos.domain.FixedArea;
-import cn.hjiabin.bos.domain.TakeTime;
+import cn.hjiabin.bos.domain.base.Courier;
+import cn.hjiabin.bos.domain.base.FixedArea;
+import cn.hjiabin.bos.domain.base.TakeTime;
 import cn.hjiabin.bos.service.IFixedAreaService;
 
 @Service

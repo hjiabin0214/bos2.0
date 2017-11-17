@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 
 import cn.hjiabin.bos.action.base.BaseAction;
-import cn.hjiabin.bos.domain.Standard;
+import cn.hjiabin.bos.domain.base.Standard;
 import cn.hjiabin.bos.service.IStandardService;
 
 import com.opensymphony.xwork2.ActionContext;

@@ -30,7 +30,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
 import cn.hjiabin.bos.action.base.BaseAction;
-import cn.hjiabin.bos.domain.Area;
+import cn.hjiabin.bos.domain.base.Area;
 import cn.hjiabin.bos.service.IAreaService;
 import cn.hjiabin.bos.utils.PinYin4jUtils;
 

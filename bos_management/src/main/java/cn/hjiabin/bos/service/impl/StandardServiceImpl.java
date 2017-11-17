@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.hjiabin.bos.dao.IStandardRepository;
-import cn.hjiabin.bos.domain.Standard;
+import cn.hjiabin.bos.domain.base.Standard;
 import cn.hjiabin.bos.service.IStandardService;
 
 @Service

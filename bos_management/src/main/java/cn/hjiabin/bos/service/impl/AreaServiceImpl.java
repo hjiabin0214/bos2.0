@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.hjiabin.bos.dao.IAreaRepository;
-import cn.hjiabin.bos.domain.Area;
+import cn.hjiabin.bos.domain.base.Area;
 import cn.hjiabin.bos.service.IAreaService;
 
 @Service

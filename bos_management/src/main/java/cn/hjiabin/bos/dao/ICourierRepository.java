@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import cn.hjiabin.bos.domain.Courier;
+import cn.hjiabin.bos.domain.base.Courier;
 
 public interface ICourierRepository extends JpaRepository<Courier, Integer>,JpaSpecificationExecutor<Courier> {
 

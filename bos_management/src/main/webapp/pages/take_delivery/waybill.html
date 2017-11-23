@@ -22,12 +22,50 @@
 					visibility: "visible"
 				});
 
-				// 对save按钮条件 点击事件
-				$('#save').click(function() {
-					// 对form 进行校验
-					if($('#orderForm').form('validate')) {
-						$('#orderForm').submit();
+				$("#orderNum").blur(function(){
+					
+					if(!$(this).val()){
+						$("#wayBillForm").get(0).reset();
+						return;
 					}
+					
+					$.post("../../order_findByOrderNum.action",{orderNum : $(this).val()},function(data){
+						if(data.success){
+							
+							$("input[name='order.id']").val(data.orderData.id);
+							
+							data.orderData.id = undefined;
+							
+							$("#wayBillForm").form('load',data.orderData);
+							
+							$("input[name='order.orderNum']").val(data.orderData.orderNum);
+							$("input[name='order.courier.company']").val(data.orderData.courier.company);
+							$("input[name='order.courier.name']").val(data.orderData.courier.name);
+						}else {
+							$("#wayBillForm").get(0).reset();
+						}
+					});
+				});
+				
+				$("#wayBillNum").blur(function(){
+					$.post("../../wayBill_findByWayBillNum.action",{wayBillNum : $(this).val()},function(data){
+						if(data.success){
+							$("#wayBillForm").form('load',data.wayBillData);
+						}
+					});
+				});
+				
+				$("#save").click(function(){
+					$.post("../../wayBill_save.action",$("#wayBillForm").serialize(),function(data){
+						if(data.success){
+							$.messager.show({
+								title : '提示窗口',
+								msg : data.msg,
+							});
+							$("#wayBillForm").get(0).reset();
+							$("input[name='order.id']").val('');
+						}
+					});
 				});
 			});
 		</script>
@@ -40,6 +78,7 @@
 			<a id="no" icon="icon-no" href="#" class="easyui-linkbutton" plain="true">取消</a>
 		</div>
 		<div style="width:95%;margin:10px auto">
+			<form id="wayBillForm" method="post" action="../../wayBill_save.action">
 			<div class="table-top">
 				<table class="table-edit" width="95%">
 					<tr class="title">
@@ -49,7 +88,7 @@
 						<td>订单号</td>
 						<td>
 							<input type="hidden" name="order.id" id="orderId" />
-							<input type="text" name="order.orderNum" />
+							<input type="text" name="order.orderNum" id="orderNum" />
 						</td>
 						<td>运单号</td>
 						<td>
@@ -265,6 +304,7 @@
 					</table>
 				</div>
 			</div>
+			</form>
 			<div class="clearfix"></div>		
 		</div>
 	</body>

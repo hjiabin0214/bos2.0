@@ -68,4 +68,7 @@
 	
 	<!-- 整合spring data jpa -->
 	<jpa:repositories base-package="cn.hjiabin.bos.dao"></jpa:repositories>
+	
+	<import resource="applicationContext-webService.xml"/>
+	<import resource="applicationContext-quartz.xml"/>
 </beans>

@@ -1,3 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java/cn/hjiabin/bos_fore/action/BaseAction.java=UTF-8
 encoding//src/main/java/cn/hjiabin/bos_fore/action/CustomerAction.java=UTF-8
+encoding//src/main/java/cn/hjiabin/bos_fore/utils/AliMessageUtils.java=UTF-8
+encoding//src/main/java/cn/hjiabin/bos_fore/utils/MailUtils.java=UTF-8
+encoding//src/main/webapp/promotion.html=UTF-8
+encoding//src/test/java/cn/hjiabin/redis/test/RedisTemplateTest.java=UTF-8
+encoding//src/test/java/cn/hjiabin/redis/test/RedisTest.java=UTF-8

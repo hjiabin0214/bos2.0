@@ -20,7 +20,7 @@
 	http://www.springframework.org/schema/cache
 	http://www.springframework.org/schema/cache/spring-cache.xsd">
 	
-	<context:component-scan base-package="cn.itcast.redis.service" />
+	<context:component-scan base-package="cn.hjiabin.redis.test" />
 	
  	<!-- spring管理redis缓存管理器 -->
 	<bean id="redisCacheManager" 

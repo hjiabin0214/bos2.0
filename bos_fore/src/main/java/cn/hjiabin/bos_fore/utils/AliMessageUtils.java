@@ -44,7 +44,7 @@ public class AliMessageUtils {
 	
 	public static void main(String[] args) {
 		try {
-			sendSmsByHTTP("17775273665", "秀,天秀,陈独秀,蒂花之秀,造化钟神秀");
+			sendSmsByHTTP("17775273665", "8888");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

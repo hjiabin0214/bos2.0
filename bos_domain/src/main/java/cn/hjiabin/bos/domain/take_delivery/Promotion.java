@@ -8,12 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import cn.hjiabin.bos.constans.Constants;
+
 
 /**
- * @description:ä¿ƒé”€ä¿¡æ¯å®ä½“ç±»
+ * @description:´ÙÏúĞÅÏ¢ÊµÌåÀà
  */
 @Entity
 @Table(name = "T_PROMOTION")
+@XmlRootElement(name = "promotion")
 public class Promotion implements Serializable {
 
 	@Id
@@ -21,25 +26,25 @@ public class Promotion implements Serializable {
 	@Column(name = "C_ID")
 	private Integer id;
 	@Column(name = "C_TITLE")
-	private String title; // å®£ä¼ æ¦‚è¦(æ ‡é¢˜)
+	private String title; // Ğû´«¸ÅÒª(±êÌâ)
 	@Column(name = "C_TITLE_IMG")
-	private String titleImg; // å®£ä¼ å›¾ç‰‡
+	private String titleImg; // Ğû´«Í¼Æ¬
 	@Column(name = "C_ACTIVE_SCOPE")
-	private String activeScope;// æ´»åŠ¨èŒƒå›´
+	private String activeScope;// »î¶¯·¶Î§
 	@Column(name = "C_START_DATE")
-	private Date startDate; // å‘å¸ƒæ—¶é—´
+	private Date startDate; // ·¢²¼Ê±¼ä
 	@Column(name = "C_END_DATE")
-	private Date endDate; // å¤±æ•ˆæ—¶é—´
+	private Date endDate; // Ê§Ğ§Ê±¼ä
 	@Column(name = "C_UPDATE_TIME")
-	private Date updateTime; // æ›´æ–°æ—¶é—´
+	private Date updateTime; // ¸üĞÂÊ±¼ä
 	@Column(name = "C_UPDATE_UNIT")
-	private String updateUnit; // æ›´æ–°å•ä½
+	private String updateUnit; // ¸üĞÂµ¥Î»
 	@Column(name = "C_UPDATE_USER")
-	private String updateUser;// æ›´æ–°äºº åç»­ä¸åå°ç”¨æˆ·å…³è”
+	private String updateUser;// ¸üĞÂÈË ºóĞøÓëºóÌ¨ÓÃ»§¹ØÁª
 	@Column(name = "C_STATUS")
-	private String status = "1"; // çŠ¶æ€ å¯å–å€¼ï¼š1.è¿›è¡Œä¸­ 2. å·²ç»“æŸ
+	private String status = "1"; // ×´Ì¬ ¿ÉÈ¡Öµ£º1.½øĞĞÖĞ 2. ÒÑ½áÊø
 	@Column(name = "C_DESCRIPTION")
-	private String description; // å®£ä¼ å†…å®¹(æ´»åŠ¨æè¿°ä¿¡æ¯)
+	private String description; // Ğû´«ÄÚÈİ(»î¶¯ÃèÊöĞÅÏ¢)
 
 	public Integer getId() {
 		return id;
@@ -58,7 +63,10 @@ public class Promotion implements Serializable {
 	}
 
 	public String getTitleImg() {
-		return titleImg;
+		if (titleImg.startsWith(Constants.BOS_MANAGEMENT_URL)) {
+			return titleImg;
+		}
+		return Constants.BOS_MANAGEMENT_URL + titleImg;
 	}
 
 	public void setTitleImg(String titleImg) {
@@ -122,7 +130,10 @@ public class Promotion implements Serializable {
 	}
 
 	public String getDescription() {
-		return description;
+		if (description.contains("<img src=\"" + Constants.BOS_MANAGEMENT_URL + "/bos_management")) {
+			return description;
+		}
+		return description.replace("<img src=\"/bos_management", "<img src=\"" + Constants.BOS_MANAGEMENT_URL + "/bos_management");
 	}
 
 	public void setDescription(String description) {

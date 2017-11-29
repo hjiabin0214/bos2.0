@@ -20,5 +20,10 @@
 			<bean class="cn.hjiabin.bos.service.impl.take_delivery.PromotionServiceImpl"></bean>
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
+	<jaxrs:server id="orderService" address="/orderService">
+		<jaxrs:serviceBeans>
+			<bean class="cn.hjiabin.bos.service.impl.take_delivery.OrderServiceImpl"></bean>
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
 	
 </beans>

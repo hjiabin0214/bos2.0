@@ -24,17 +24,17 @@ public interface ICustomerService {
 	public List<Customer> findNoAssociationCustomers();
 	
 	//查询已关联到定区的客户
-	@Path("associationfixedareacustomers/{fixedareaid}")
+	@Path("/associationfixedareacustomers/{fixedareaid}")
 	@GET
 	@Produces({"application/xml","application/json"})
 	public List<Customer> findHasAssociationCustomers(@PathParam("fixedareaid") String fixedAreaId);
 	
 	//将客户关联到定区上,将所有客户id拼成1,2,3
-	@Path("associationcustomerstofixedarea")
+	@Path("/associationcustomerstofixedarea")
 	@PUT
 	public void associationCustomersToFixedArea(@QueryParam("customerIdStr") String customerIdStr, @QueryParam("fixedAreaId") String fixedAreaId);
 	
-	@Path("customer")
+	@Path("/customer")
 	@POST
 	@Consumes({"application/xml","application/json"})
 	public void regist(Customer customer);
@@ -47,4 +47,14 @@ public interface ICustomerService {
 	@Path("/customer/updateType/{telephone}")
 	@GET
 	public void updateType(@PathParam("telephone") String telephone);
+	
+	@Path("/customer/login")
+	@GET
+	@Produces({"application/xml","application/json"})
+	public Customer login(@QueryParam("telephone") String telephone, @QueryParam("password") String password);
+	
+	@Path("/customer/findFixedAreaIdByAddress")
+	@GET
+	@Consumes({"application/xml", "application/json"})
+	public String findFixedAreaIdByAddress(@QueryParam("address") String address);
 }

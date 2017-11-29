@@ -8,32 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.struts2.json.annotations.JSON;
 
 
 /**
- * @description:地域信息实体类，主要包含 省市区(县)
+ * @description:鍦板煙淇℃伅瀹炰綋绫伙紝涓昏鍖呭惈 鐪佸競鍖�鍘�
  */
 @Entity
 @Table(name = "T_AREA")
+@XmlRootElement(name="area")
 public class Area {
 
 	@Id
 	@Column(name = "C_ID")
 	private String id;
 	@Column(name = "C_PROVINCE")
-	private String province; // 省
+	private String province; // 鐪�
 	@Column(name = "C_CITY")
-	private String city; // 城市
+	private String city; // 鍩庡競
 	@Column(name = "C_DISTRICT")
-	private String district; // 区域
+	private String district; // 鍖哄煙
 	@Column(name = "C_POSTCODE")
-	private String postcode; // 邮编
+	private String postcode; // 閭紪
 	@Column(name = "C_CITYCODE")
-	private String citycode; // 城市编码
+	private String citycode; // 鍩庡競缂栫爜
 	@Column(name = "C_SHORTCODE")
-	private String shortcode; // 简码
+	private String shortcode; // 绠�爜
 
 	@OneToMany(mappedBy = "area")
 	private Set<SubArea> subareas = new HashSet<SubArea>();

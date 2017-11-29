@@ -38,7 +38,7 @@ public class PromotionAction extends BaseAction<Promotion> {
 
 	@Action(value="promotion_pageQuery",results={@Result(name="success",type="json")})
 	public String pageQuery(){
-		PageBean<Promotion> pageBean =  WebClient.create(Constants.BOS_MANAGEMENT_URL+"/bos_management/services/promotionService/pageQuery?page="+page+"&rows="+rows).accept(MediaType.APPLICATION_JSON).get(PageBean.class);
+		PageBean<Promotion> pageBean =  WebClient.create(Constants.BOS_MANAGEMENT_URL+"/services/promotionService/pageQuery?page="+page+"&rows="+rows).accept(MediaType.APPLICATION_JSON).get(PageBean.class);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return SUCCESS;
 	}
@@ -52,7 +52,7 @@ public class PromotionAction extends BaseAction<Promotion> {
 			Configuration configuration = new Configuration(Configuration.VERSION_2_3_22);
 			configuration.setDirectoryForTemplateLoading(new File(ServletActionContext.getServletContext().getRealPath("/WEB-INF/freemarker_templates")));
 			Template template = configuration.getTemplate("promotion_detail.ftl");
-			Promotion promotion = WebClient.create(Constants.BOS_MANAGEMENT_URL+"/bos_management/services/promotionService/promotion/"+model.getId()).accept(MediaType.APPLICATION_JSON).get(Promotion.class);
+			Promotion promotion = WebClient.create(Constants.BOS_MANAGEMENT_URL+"/services/promotionService/promotion/"+model.getId()).accept(MediaType.APPLICATION_JSON).get(Promotion.class);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("promotion", promotion);
 			template.process(map, new OutputStreamWriter(new FileOutputStream(htmlFile),"utf-8"));

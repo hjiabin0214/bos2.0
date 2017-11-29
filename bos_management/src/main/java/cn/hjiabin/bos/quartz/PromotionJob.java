@@ -16,8 +16,8 @@ public class PromotionJob implements Job {
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		System.out.println("活动过期处理程序启动...");	
-		promotionService.updateStatus(new Date());
+		//System.out.println("活动过期处理程序启动...");	
+		//promotionService.updateStatus(new Date());
 	}
 
 }

@@ -59,7 +59,7 @@ public class WayBillAction extends BaseAction<WayBill> {
 	public String pageQuery(){
 		
 		Pageable pageable = new PageRequest(page-1, rows, new Sort(new Sort.Order(Sort.Direction.DESC, "id")));
-		Page<WayBill> pageData = wayBillServiceImpl.findPageData(pageable);
+		Page<WayBill> pageData = wayBillServiceImpl.findPageData(model, pageable);
 		pushPageDataToValueStack(pageData);
 		return SUCCESS;
 	}

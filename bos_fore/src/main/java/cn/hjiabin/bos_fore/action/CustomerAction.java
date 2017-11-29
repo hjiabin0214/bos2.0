@@ -24,6 +24,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 
+import cn.hjiabin.bos.constans.Constants;
 import cn.hjiabin.bos_fore.utils.MailUtils;
 import cn.hjiabin.crm.domain.Customer;
 
@@ -110,5 +111,17 @@ public class CustomerAction extends BaseAction<Customer> {
 			redisTemplate.delete(model.getTelephone());
 		}
 		return NONE;
+	}
+	
+	@Action(value="customer_login",results={@Result(name="login",type="redirect",location="login.html"), @Result(name="success",type="redirect",location="index.html#/myhome")})
+	public String login(){
+		
+		Customer customer = WebClient.create(Constants.CRM_MANAGEMENT_URL+"/services/customerService/customer/login?telephone="+model.getTelephone()+"&password="+model.getPassword()).accept(MediaType.APPLICATION_JSON).get(Customer.class);
+		if(customer == null){
+			return LOGIN;
+		}else {
+			ServletActionContext.getRequest().getSession().setAttribute("customer", customer);
+			return SUCCESS;
+		}
 	}
 }

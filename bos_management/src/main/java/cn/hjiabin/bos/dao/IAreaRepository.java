@@ -7,4 +7,6 @@ import cn.hjiabin.bos.domain.base.Area;
 
 public interface IAreaRepository extends JpaRepository<Area, String>,JpaSpecificationExecutor<Area> {
 
+	Area findByProvinceAndCityAndDistrict(String province, String city, String district);
+
 }

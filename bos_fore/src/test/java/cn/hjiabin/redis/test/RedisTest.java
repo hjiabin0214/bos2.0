@@ -8,8 +8,8 @@ public class RedisTest {
 
 	@Test
 	public void test(){
-		Jedis jedis = new Jedis("localhost");
-		jedis.setex("company", 20, "黑马程序员");
-		System.out.println(jedis.get("company"));
+		//Jedis jedis = new Jedis("localhost");
+		//jedis.setex("company", 20, "黑马程序员");
+		//System.out.println(jedis.get("company"));
 	}
 }

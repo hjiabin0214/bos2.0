@@ -27,4 +27,14 @@ public class PermissionServiceImpl implements IPermissionService {
 		}
 	}
 
+	@Override
+	public List<Permission> findAll() {
+		return permissionRepository.findAll();
+	}
+
+	@Override
+	public void save(Permission permission) {
+		permissionRepository.save(permission);
+	}
+
 }

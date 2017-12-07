@@ -23,7 +23,7 @@ import cn.hjiabin.bos.service.system.IPermissionService;
 import cn.hjiabin.bos.service.system.IRoleService;
 import cn.hjiabin.bos.service.system.IUserService;
 
-@Service("bosRealm")
+//@Service("bosRealm")
 public class BosRealm extends AuthorizingRealm {
 
 	@Autowired

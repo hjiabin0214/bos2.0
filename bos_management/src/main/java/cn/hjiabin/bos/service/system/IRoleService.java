@@ -9,4 +9,8 @@ public interface IRoleService {
 
 	List<Role> findByUser(User user);
 
+	List<Role> findAll();
+
+	void saveRole(Role role, String[] permissionIds, String menuIds);
+
 }

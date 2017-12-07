@@ -39,6 +39,42 @@
 				var params = $("#searchForm").serializeJson();
 				$('#tt').datagrid('load', params);
 			}
+			
+			$(function(){
+				$("#transitBtn").click(function(){
+					var rows = $("#tt").datagrid('getSelections');
+					if(rows.length == 0){
+						$.messager.alert('警告','必须选中运单信息','warning');
+					}else {
+						var array = new Array();
+						for(var i=0; i<rows.length; i++){
+							array.push(rows[i].id);
+						}
+						var wayBillIds = array.join(",");
+						alert("1");
+						$.post("../../transit_create.action",{wayBillIds:wayBillIds}, function(data){
+							if(data.success == true){
+								$.messager.show({
+									title : '操作成功',
+									msg : data.msg
+								});
+							}else {
+								$.messager.show({
+									title : '操作失败',
+									msg : data.msg
+								});
+							}
+						});
+					}
+				});
+				
+				$("#exportXlsxBtn").click(function(){
+					$("#searchForm").attr("action", "../../report_exportXlsx.action");
+					$("#searchForm").submit();
+				});
+				
+			});
+			
 		</script>
 	</head>
 
@@ -52,7 +88,8 @@
 			<a id="help" icon="icon-save" href="#" class="easyui-linkbutton" plain="true">保存</a>
 			<a id="help" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">打印标签</a>
 			<a id="help" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">打印工作单</a>
-			
+			<a id="transitBtn" icon="icon-edit" href="#" class="easyui-linkbutton" plain="true">开始中转配送</a>
+			<a id="exportXlsxBtn" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">导出Excel表</a>
 			<br />
 			<form id="searchForm">
 				运单号：<input name="wayBillNum" style="line-height:26px;border:1px solid #ccc">

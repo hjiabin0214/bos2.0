@@ -18,7 +18,7 @@ public class RedisTemplateTest {
 	
 	@Test
 	public void templateTest(){
-		redisTemplate.opsForValue().set("city", "北京", 20, TimeUnit.SECONDS);
-		System.out.println(redisTemplate.opsForValue().get("city"));
+		//redisTemplate.opsForValue().set("city", "北京", 20, TimeUnit.SECONDS);
+		//System.out.println(redisTemplate.opsForValue().get("city"));
 	}
 }

@@ -9,4 +9,8 @@ public interface IPermissionService {
 
 	List<Permission> findByUser(User user);
 
+	List<Permission> findAll();
+
+	void save(Permission permission);
+
 }

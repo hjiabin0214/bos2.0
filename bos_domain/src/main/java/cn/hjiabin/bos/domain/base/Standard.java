@@ -1,5 +1,6 @@
 package cn.hjiabin.bos.domain.base;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,32 +12,32 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @description:收派标准
+ * @description:鏀舵淳鏍囧噯
  */
 @Entity
 @Table(name = "T_STANDARD")
-public class Standard {
+public class Standard implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "C_ID")
-	private Integer id; // 主键
+	private Integer id; // 涓婚敭
 	@Column(name = "C_NAME")
-	private String name; // 标准名称
+	private String name; // 鏍囧噯鍚嶇О
 	@Column(name = "C_MIN_WEIGHT")
-	private Integer minWeight; // 最小重量
+	private Integer minWeight; // 鏈�皬閲嶉噺
 	@Column(name = "C_MAX_WEIGHT")
-	private Integer maxWeight; // 最大重量
+	private Integer maxWeight; // 鏈�ぇ閲嶉噺
 	@Column(name = "C_MIN_LENGTH")
-	private Integer minLength; // 最小长度
+	private Integer minLength; // 鏈�皬闀垮害
 	@Column(name = "C_MAX_LENGTH")
-	private Integer maxLength; // 最大重量
+	private Integer maxLength; // 鏈�ぇ閲嶉噺
 	@Column(name = "C_OPERATING_TIME")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date operatingTime;// 操作时间
+	private Date operatingTime;// 鎿嶄綔鏃堕棿
 	@Column(name = "C_OPERATOR")
-	private String operator; // 操作员
+	private String operator; // 鎿嶄綔鍛�
 	@Column(name = "C_OPERATING_COMPANY")
-	private String operatingCompany; // 操作单位
+	private String operatingCompany; // 鎿嶄綔鍗曚綅
 
 	public Integer getId() {
 		return id;

@@ -64,7 +64,7 @@
 	</bean>
 	
 	<!-- 注解事务管理 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 	
 	<!-- 整合spring data jpa -->
 	<jpa:repositories base-package="cn.hjiabin.bos.dao"></jpa:repositories>
@@ -74,4 +74,5 @@
 	<import resource="applicationContext-mq.xml"/>
 	<import resource="applicationContext-elasticsearch.xml"/>
 	<import resource="applicationContext-shiro.xml"/>
+	<import resource="applicationContext-cache.xml"/>
 </beans>
